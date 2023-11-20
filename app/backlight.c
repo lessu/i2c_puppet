@@ -5,9 +5,9 @@
 #include <pico/stdlib.h>
 static bool s_is_idle;
 static uint32_t s_idle_count;
-#define BACKLIGHT_MAIN_LOOP_INTERVAL_MS 30
+#define BACKLIGHT_MAIN_LOOP_INTERVAL_MS 10
 #define BACKLIGHT_MS_TO_COUNT(ms)       (ms/BACKLIGHT_MAIN_LOOP_INTERVAL_MS)
-#define BACKLIGHT_IDLE_TURNOFF_MS 	10000/**10s*/
+#define BACKLIGHT_IDLE_TURNOFF_MS 	30000/**10s*/
 void backlight_sync(void)
 {
 	if(s_is_idle){
