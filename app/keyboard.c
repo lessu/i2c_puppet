@@ -273,6 +273,9 @@ void keyboard_inject_event(uint8_t key, enum key_state state)
 		cb->func(key, state);
 		cb = cb->next;
 	}
+
+	backlight_trigger_active();
+	
 }
 
 void keyboard_add_key_callback(struct key_callback *callback)

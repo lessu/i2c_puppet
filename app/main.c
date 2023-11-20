@@ -15,6 +15,8 @@
 #include "usb.h"
 #include "pi.h"
 
+extern bool s_main_process_10ms(struct repeating_timer *t);
+
 // since the SDK doesn't support per-GPIO irq, we use this global irq and forward it
 static void gpio_irq(uint gpio, uint32_t events)
 {
@@ -60,9 +62,17 @@ int main(void)
 	printf("Starting main loop\r\n");
 #endif
 
+	struct repeating_timer timer;
+	add_repeating_timer_ms(10,s_main_process_10ms,0,&timer);
+	/** never stop timer */
 	while (true) {
 		__wfe();
 	}
 
 	return 0;
+}
+
+bool s_main_process_10ms(struct repeating_timer *t){
+	backlight_main10ms();
+	return true;
 }
